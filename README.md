@@ -118,12 +118,15 @@ int main() {
 ---
 
 📁 examples/
-blink.cpp
-taster.cpp
-pwm.cpp
-interrupt.cpp
-highlow.cpp
-LEDTasterPWM.cpp
+```
+ ├── blink.cpp               // Einzelne LED blinken lassen
+ ├── taster.cpp              // Taster abfragen
+ ├── pwm.cpp                 // PWM-Steuerung für LEDs oder Motoren
+ ├── interrupt.cpp           // Interrupt auf Pins
+ ├── highlow.cpp             // Pin high/low setzen
+ └── LEDTasterPWM.cpp        // Kombination: LED, Taster & PWM gleichzeitig
+
+```
  
 ---
 
