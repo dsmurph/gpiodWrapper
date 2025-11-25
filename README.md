@@ -174,8 +174,9 @@ cd build
 cmake ..
 make
 ./blink
+```
 
-BASH
+Or BASH
 ```bash
  g++ blink.cpp -o blink -lgpiod
 ```
