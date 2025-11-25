@@ -19,6 +19,7 @@ Perfect for hobbyists, students, and projects where you just want GPIO control �
 
 ---
 
+
 ## 📦 Dependencies
 
 | Requirement | Version |
@@ -35,6 +36,7 @@ sudo apt install libgpiod-dev
 
 ---
 
+
 ## ✨ Features
 
 ✔️ Simple GPIO input/output  
@@ -45,6 +47,7 @@ sudo apt install libgpiod-dev
 ✔️ Works with libgpiod 2.x  
 
 ---
+
 
 ## 🧩 Provided Functions
 
@@ -59,6 +62,7 @@ sudo apt install libgpiod-dev
 | `detachInterrupt(pin)` | Stops monitoring interrupt on the pin |
 
 ---
+
 
 ## 🚀 Basic Example
 
@@ -94,6 +98,7 @@ int main() {
 
 ---
 
+
 ## ⚡ Interrupt Example
 
 ```cpp
@@ -117,6 +122,7 @@ int main() {
 ```
 ---
 
+
 📁 examples/
 ```
  ├── blink.cpp               // Einzelne LED blinken lassen
@@ -130,6 +136,7 @@ int main() {
  
 ---
 
+
 ## 📦 Install build-essential and CMake 
 ```bash
 sudo apt update
@@ -138,6 +145,7 @@ sudo apt install build-essential -y
 sudo apt install cmake -y
 ```
 ---
+
 
 ## 🔧 Integration Example 
 
@@ -153,6 +161,8 @@ target_link_libraries(example gpiod)
 target_include_directories(example PRIVATE include)
 ```
 ---
+
+
 ### 📦 Build Instructions
 
 ```bash
@@ -171,6 +181,7 @@ BASH
 ```
 ---
 
+
 ## 📄 License
 
 MIT License  
@@ -178,11 +189,13 @@ You are free to use, modify, and distribute this project.
 
 ---
 
+
 ## 🤝 Contributions
 
 Pull requests and improvements are welcome.  
 Feel free to fork, enhance, or suggest features.
 
 ---
+
 
 ⭐ If this wrapper helps your project — consider starring it on GitHub!
