@@ -1,5 +1,5 @@
 /**
- * @file blink.cpp
+ * @file LEDTasterPWM.cpp
  * @class gpiodWrapper.hpp
  * @brief Lightweight C++ wrapper for libgpiod GPIO access.
  *
@@ -19,22 +19,39 @@
 
 #include "gpiodWrapper.hpp"
 #include <iostream>
-#include <chrono>
 #include <thread>
+#include <chrono>
 
 int main() {
     try {
-        // /dev/gpiochip0 öffnen
         gpiodWrapper chip(0);
-        // Pin17 als Output
+
+        // LED an Pin 17
         chip.configurePin(17, Output);
 
-        // Einfaches Blinken (Pin,Interval in ms, Wiederholungen)
+        // Taster an Pin 18
+        chip.configurePin(18, Input);
+
+        // Interrupt auf RISING (Taster gedrückt)
+        chip.attachInterrupt(18, RISING, []() {
+            std::cout << "Taster gedrückt!\n";
+        });
+
+        // Blink LED 10x
         chip.blinkPin(17, 500, 10);
 
-        std::this_thread::sleep_for(std::chrono::seconds(6));
-        // Optional Pin reset
+        // PWM LED (50% Duty, 2 Hz) parallel
+        chip.pwmPin(17, 50, 2);
+
+        // Detach/Pattern LED (HIGH/LOW alle 100 ms)
+        chip.detachPin(17, HIGH, LOW, 100);
+
+        std::this_thread::sleep_for(std::chrono::seconds(10));
+
+        // Aufräumen
+        chip.detachInterrupt(18);
         chip.resetPin(17);
+        chip.resetPin(18);
 
     } catch (const std::exception &e) {
         std::cerr << e.what() << "\n";

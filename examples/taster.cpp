@@ -1,5 +1,5 @@
 /**
- * @file blink.cpp
+ * @file taster.cpp
  * @class gpiodWrapper.hpp
  * @brief Lightweight C++ wrapper for libgpiod GPIO access.
  *
@@ -24,20 +24,20 @@
 
 int main() {
     try {
-        // /dev/gpiochip0 öffnen
         gpiodWrapper chip(0);
-        // Pin17 als Output
-        chip.configurePin(17, Output);
+        chip.configurePin(18, Input);
 
-        // Einfaches Blinken (Pin,Interval in ms, Wiederholungen)
-        chip.blinkPin(17, 500, 10);
+        chip.attachInterrupt(18, RISING, []() {
+            std::cout << "Taster gedrückt!\n";
+        });
 
-        std::this_thread::sleep_for(std::chrono::seconds(6));
-        // Optional Pin reset
-        chip.resetPin(17);
+        std::this_thread::sleep_for(std::chrono::seconds(20));
 
+        chip.detachInterrupt(18);
+        chip.resetPin(18);
     } catch (const std::exception &e) {
         std::cerr << e.what() << "\n";
     }
+
     return 0;
 }

@@ -1,5 +1,5 @@
 /**
- * @file blink.cpp
+ * @file pwm.cpp
  * @class gpiodWrapper.hpp
  * @brief Lightweight C++ wrapper for libgpiod GPIO access.
  *
@@ -18,22 +18,23 @@
  */
 
 #include "gpiodWrapper.hpp"
+#include <thread>
 #include <iostream>
 #include <chrono>
-#include <thread>
 
 int main() {
     try {
-        // /dev/gpiochip0 öffnen
         gpiodWrapper chip(0);
-        // Pin17 als Output
+
+        // LED an Pin 17
         chip.configurePin(17, Output);
 
-        // Einfaches Blinken (Pin,Interval in ms, Wiederholungen)
-        chip.blinkPin(17, 500, 10);
+        // PWM LED (50% Duty, 2 Hz)
+        chip.pwmPin(17, 50, 2);
 
-        std::this_thread::sleep_for(std::chrono::seconds(6));
-        // Optional Pin reset
+        std::this_thread::sleep_for(std::chrono::seconds(10));
+
+        // Aufräumen
         chip.resetPin(17);
 
     } catch (const std::exception &e) {
