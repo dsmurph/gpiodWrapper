@@ -149,9 +149,7 @@ sudo apt install cmake -y
 
 ## 🔧 Integration Example 
 
-## Cmake
-
-CMakeLists.txt
+CMakeLists.txt (change blink.cpp for your project)
 ```cmake
 cmake_minimum_required(VERSION 3.10)
 project(gpiodWrapperExample)
@@ -177,9 +175,10 @@ cmake ..
 make
 ./blink
 ```
-## Your build station looks like this:
-📁 gpiodWrapper-master/
+## 🔧 Your build station looks like this:
+📁 gpiodWrapper/
 ```
+  CMakeLists.txt
   📁 include
    ├── gpiodWrapper.hpp
   📁 src
@@ -190,7 +189,7 @@ make
    ├── highlow.cpp
    └── LEDTasterPWM.cpp
   📁 build
-   ├── blink
+   ├── blink //your Executable
    ├── ...
 
 ```
