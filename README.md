@@ -68,10 +68,11 @@ sudo apt install libgpiod-dev
 
 ```cpp
 
-#include "gpiodWrapper.hpp"
 #include <iostream>
 #include <chrono>
 #include <thread>
+
+#include "gpiodWrapper.hpp"
 
 int main() {
     try {
@@ -103,8 +104,9 @@ int main() {
 
 ```cpp
 
-#include "gpiodWrapper.hpp"
 #include <iostream>
+
+#include "gpiodWrapper.hpp"
 
 int main() {
     gpiodWrapper chip(0);                        // /dev/gpiochip0 öffnen
