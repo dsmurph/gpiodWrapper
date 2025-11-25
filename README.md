@@ -115,22 +115,52 @@ int main() {
 }
 
 ```
+---
 
+📁 examples/
+ ├── blink.cpp
+ ├── taster.cpp
+ ├── pwm.cpp
+ ├── interrupt.cpp
+ ├── highlow.cpp
+ └── LEDTasterPWM.cpp
+ 
+---
+
+## 📦 Install build-essential and CMake 
+```bash
+sudo apt update
+sudo apt upgrade -y
+sudo apt install build-essential -y
+sudo apt install cmake -y
+```
 ---
 
 ## 🔧 Integration Example 
 
-CMake
+CMakeLists.txt
 ```cmake
 cmake_minimum_required(VERSION 3.10)
 project(gpiodWrapperExample)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(example main.cpp)
+add_executable(example blink.cpp)
 target_link_libraries(example gpiod)
 target_include_directories(example PRIVATE include)
 ```
+---
+### 📦 Build Instructions
+
+```bash
+cd gpiodWrapper-master
+mkdir src include build
+mv gpiodWrapper.hpp include
+mv *.cpp src
+cd build
+cmake ..
+make
+./blink
 
 BASH
 ```bash
