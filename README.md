@@ -149,6 +149,8 @@ sudo apt install cmake -y
 
 ## 🔧 Integration Example 
 
+## Cmake
+
 CMakeLists.txt
 ```cmake
 cmake_minimum_required(VERSION 3.10)
@@ -163,7 +165,7 @@ target_include_directories(example PRIVATE include)
 ---
 
 
-### 📦 Build Instructions
+## 📦 Build Instructions
 
 ```bash
 cd gpiodWrapper-master
@@ -175,8 +177,26 @@ cmake ..
 make
 ./blink
 ```
+## Your build station looks like this:
+📁 gpiodWrapper-master/
+```
+  📁 include
+   ├── gpiodWrapper.hpp
+  📁 src
+   ├── blink.cpp
+   ├── taster.cpp
+   ├── pwm.cpp
+   ├── interrupt.cpp
+   ├── highlow.cpp
+   └── LEDTasterPWM.cpp
+  📁 build
+   ├── blink
+   ├── ...
 
-Or BASH
+```
+
+## or quickly
+(The files to be compiled are located in one directory!)
 ```bash
  g++ blink.cpp -o blink -lgpiod
 ```
