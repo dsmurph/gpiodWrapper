@@ -17,10 +17,11 @@
  * GitHub: https://github.com/dsmurph/gpiodWrapper
  */
 
-#include "gpiodWrapper.hpp"
 #include <iostream>
 #include <thread>
 #include <chrono>
+
+#include "gpiodWrapper.hpp"
 
 int main() {
     // Chip öffnen
