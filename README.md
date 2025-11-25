@@ -203,6 +203,28 @@ make
 ```
 ---
 
+## 🛠️ Projekt 
+Here's another nice example from a different project where I'm using gpiodWrapper.
+
+```cpp
+void faultCtrl() {
+    gpiodWrapper chip(0);
+    chip.configurePin(faultLED, Output);
+    chip.setPin(faultLED, HIGH);
+    while (true) {
+       if (fault) {
+          static unsigned long last = 0;
+          static bool state = true;
+          if (millis() - last >= 500) {
+             last = millis();
+             state = !state;
+             chip.setPin(faultLED, state ? HIGH : LOW);
+           }
+        } else { delay(50); }
+    }
+}
+'''
+---
 
 ## 📄 License
 
