@@ -17,10 +17,11 @@
  * GitHub: https://github.com/dsmurph/gpiodWrapper
  */
 
-#include "gpiodWrapper.hpp"
 #include <thread>
 #include <iostream>
 #include <chrono>
+
+#include "gpiodWrapper.hpp"
 
 int main() {
     try {
