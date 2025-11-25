@@ -118,12 +118,12 @@ int main() {
 ---
 
 📁 examples/
-   ├── blink.cpp
-   ├── taster.cpp
-   ├── pwm.cpp
-   ├── interrupt.cpp
-   ├── highlow.cpp
-   └── LEDTasterPWM.cpp
+blink.cpp
+taster.cpp
+pwm.cpp
+interrupt.cpp
+highlow.cpp
+LEDTasterPWM.cpp
  
 ---
 
