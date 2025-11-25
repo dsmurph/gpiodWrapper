@@ -223,7 +223,8 @@ void faultCtrl() {
         } else { delay(50); }
     }
 }
-'''
+```
+
 ---
 
 ## 📄 License
