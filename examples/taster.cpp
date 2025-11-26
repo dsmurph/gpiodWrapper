@@ -26,10 +26,10 @@
 int main() {
     try {
         gpiodWrapper chip(0);
-        chip.configurePin(18, Input);
+        chip.configurePin(18, Pullup);
 
         chip.attachInterrupt(18, RISING, []() {
-            std::cout << "Taster gedrückt!\n";
+            std::cout << "Button pressed!\n";
         });
 
         std::this_thread::sleep_for(std::chrono::seconds(20));
