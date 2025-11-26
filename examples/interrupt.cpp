@@ -24,28 +24,28 @@
 #include "gpiodWrapper.hpp"
 
 int main() {
-    // Chip öffnen
+    // Chip open
     gpiodWrapper chip(0);
 
-    // Pin konfigurieren (z.B. GPIO18 als Input mit Pull-Up)
+    // Configure Pin (GPIO18 Input)
     chip.configurePin(18, Input);
 
-    // Interrupt mit Callback OHNE Parameter
+    // Interrupt with callback WITHOUT parameters
     chip.attachInterrupt(18, RISING, []() {
-        std::cout << "Taster gedrückt! (ohne Parameter)\n";
+        std::cout << "Button pressed!\n";
     });
 
-    // Interrupt mit Callback MIT Pin-Parameter
+    // Interrupt with callback and pin parameters
     chip.attachInterrupt(18, FALLING, [](int pin) {
-        std::cout << "Pin " << pin << " hat ein FALLING Event ausgelöst!\n";
+        std::cout << "Pin " << pin << " has triggered a FALLING event!\n";
     });
 
-    std::cout << "Interrupts aktiv. Warte 15 Sekunden...\n";
+    std::cout << "Interrupts are active. Wait 15 seconds....\n";
 
-    // Test-Dauer (z.B. 15 Sekunden)
+    // Test duration (15 seconds)
     std::this_thread::sleep_for(std::chrono::seconds(15));
 
-    std::cout << "Beende Interrupts...\n";
+    std::cout << ""End interrupts...\n";
     chip.detachInterrupt(18);
 
     return 0;
