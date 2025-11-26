@@ -27,7 +27,7 @@ int main() {
     try {
         gpiodWrapper chip(0);
 
-        // LED an Pin 17
+        // LED Pin 17
         chip.configurePin(17, Output);
 
         // PWM LED (50% Duty, 2 Hz)
@@ -35,7 +35,7 @@ int main() {
 
         std::this_thread::sleep_for(std::chrono::seconds(10));
 
-        // Aufräumen
+        // Clean up
         chip.resetPin(17);
 
     } catch (const std::exception &e) {
