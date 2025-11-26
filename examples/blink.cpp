@@ -25,12 +25,12 @@
 
 int main() {
     try {
-        // /dev/gpiochip0 öffnen
+        // /dev/gpiochip0 open
         gpiodWrapper chip(0);
-        // Pin17 als Output
+        // Pin17 as Output
         chip.configurePin(17, Output);
 
-        // Einfaches Blinken (Pin,Interval in ms, Wiederholungen)
+        // Simple blinking (pin, interval in ms, repetitions)
         chip.blinkPin(17, 500, 10);
 
         std::this_thread::sleep_for(std::chrono::seconds(6));
