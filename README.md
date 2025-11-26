@@ -76,23 +76,25 @@ sudo apt install libgpiod-dev
 
 int main() {
     try {
-        gpiodWrapper chip(0);          // /dev/gpiochip0 öffnen
-
-        chip.configurePin(17, Output); // Pin als Output konfigurieren
-
-        chip.setPin(17, HIGH);         // LED ein
+        // /dev/gpiochip0 open
+        gpiodWrapper chip(0);
+        // Configure pin as output
+        chip.configurePin(17, Output);
+        // Turn on LED
+        chip.setPin(17, HIGH);
         std::this_thread::sleep_for(std::chrono::seconds(1));
-
-        chip.setPin(17, LOW);          // LED aus
+        // // Turn off LED
+        chip.setPin(17, LOW);
         std::this_thread::sleep_for(std::chrono::seconds(1));
-
-        chip.resetPin(17);             // Pin freigeben (optional)
+        // Unlock PIN (optional)
+        chip.resetPin(17);
     }
     catch (const std::exception& e) {
         std::cerr << "Fehler: " << e.what() << std::endl;
     }
 
-    return 0;                          // Destruktor von gpiodWrapper wird automatisch aufgerufen
+    // Destructor of gpiodWrapper is called automatically
+    return 0;
 }
 
 ```
@@ -109,11 +111,14 @@ int main() {
 #include "gpiodWrapper.hpp"
 
 int main() {
-    gpiodWrapper chip(0);                        // /dev/gpiochip0 öffnen
+    // /dev/gpiochip0 open
+    gpiodWrapper chip(0);
 
-    chip.configurePin(22, Input);                // Pin als Input konfigurieren
+    // Configure pin as input
+    chip.configurePin(22, Input);
 
-    chip.attachInterrupt(22, RISING, [](int pin) // Pin als Interrupt konfigurieren
+    // Configure pin as interrupt
+    chip.attachInterrupt(22, RISING, [](int pin) 
          {std::cout << "Interrupt! Pin: " << pin << std::endl;});
 
     while (true) {
@@ -127,12 +132,12 @@ int main() {
 
 📁 examples/
 ```
- ├── blink.cpp               // Einzelne LED blinken lassen
- ├── taster.cpp              // Taster abfragen
- ├── pwm.cpp                 // PWM-Steuerung für LEDs oder Motoren
- ├── interrupt.cpp           // Interrupt auf Pins
- ├── highlow.cpp             // Pin high/low setzen
- └── LEDTasterPWM.cpp        // Kombination: LED, Taster & PWM gleichzeitig
+ ├── blink.cpp         // Make individual LEDs blink
+ ├── taster.cpp        // Query buttons
+ ├── pwm.cpp           // PWM-control unit for LEDs or motors
+ ├── interrupt.cpp     // Interrupt on pins
+ ├── highlow.cpp       // Set Pin high/low
+ └── LEDTasterPWM.cpp  // Combination: LED, push button & PWM simultaneously
 
 ```
  
@@ -208,16 +213,26 @@ Here's another nice example from a different project where I'm using gpiodWrappe
 
 ```cpp
 void faultCtrl() {
+    // /dev/gpiochip0 open
     gpiodWrapper chip(0);
+    // Configure Pin as Output 
     chip.configurePin(faultLED, Output);
+    // Turn faultLED off (hardware-related)
     chip.setPin(faultLED, HIGH);
     while (true) {
+       //In case of errors
        if (fault) {
+          // Interval
           static unsigned long last = 0;
+          // Set toggle variable
           static bool state = true;
+          // Query timer
           if (millis() - last >= 500) {
+             // Set Timer 
              last = millis();
+             // toggle state
              state = !state;
+             // Turn the LED on or off depending on the state (bool to PinValue)
              chip.setPin(faultLED, state ? HIGH : LOW);
            }
         } else { delay(50); }
