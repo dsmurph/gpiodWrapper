@@ -27,29 +27,29 @@ int main() {
     try {
         gpiodWrapper chip(0);
 
-        // LED an Pin 17
+        // LED to Pin 17
         chip.configurePin(17, Output);
 
-        // Taster an Pin 18
+        // Taster to Pin 18
         chip.configurePin(18, Input);
 
-        // Interrupt auf RISING (Taster gedrückt)
+        // Interrupt RISING (Button pressed!)
         chip.attachInterrupt(18, RISING, []() {
-            std::cout << "Taster gedrückt!\n";
+            std::cout << "Button pressed!\n";
         });
 
         // Blink LED 10x
         chip.blinkPin(17, 500, 10);
 
-        // PWM LED (50% Duty, 2 Hz) parallel
+        // PWM LED (50% Duty, 2 Hz)
         chip.pwmPin(17, 50, 2);
 
-        // Detach/Pattern LED (HIGH/LOW alle 100 ms)
+        // Detach/Pattern LED (HIGH/LOW every 100 ms)
         chip.detachPin(17, HIGH, LOW, 100);
 
         std::this_thread::sleep_for(std::chrono::seconds(10));
 
-        // Aufräumen
+        // Clean up
         chip.detachInterrupt(18);
         chip.resetPin(17);
         chip.resetPin(18);
