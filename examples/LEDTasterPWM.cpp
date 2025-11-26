@@ -27,10 +27,10 @@ int main() {
     try {
         gpiodWrapper chip(0);
 
-        // LED to Pin 17
+        // LED Pin 17
         chip.configurePin(17, Output);
 
-        // Taster to Pin 18
+        // Taster Pin 18
         chip.configurePin(18, Input);
 
         // Interrupt RISING (Button pressed!)
