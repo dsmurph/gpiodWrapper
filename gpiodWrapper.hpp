@@ -67,7 +67,7 @@ public:
 
            case Input:
                gpiod_line_settings_set_direction(settings, GPIOD_LINE_DIRECTION_INPUT);
-               gpiod_line_settings_set_bias(settings, GPIOD_LINE_BIAS_AS_IS);
+               gpiod_line_settings_set_bias(settings, GPIOD_LINE_BIAS_DISABLE);
                break;
 
            case Pullup:
@@ -84,7 +84,7 @@ public:
                std::cerr << "Invalid direction value for PIN "
                << pin << " – focus on secure input (High-Impedance)\n";
                gpiod_line_settings_set_direction(settings, GPIOD_LINE_DIRECTION_INPUT);
-               gpiod_line_settings_set_bias(settings, GPIOD_LINE_BIAS_AS_IS);
+               gpiod_line_settings_set_bias(settings, GPIOD_LINE_BIAS_DISABLE);
                break;     
        }
 
