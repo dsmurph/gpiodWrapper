@@ -37,7 +37,7 @@ public:
         std::string path = "/dev/gpiochip" + std::to_string(num);
         chip = gpiod_chip_open(path.c_str());
         if (!chip)
-            throw std::runtime_error("Konnte " + path + " nicht öffnen");
+            throw std::runtime_error("Could not open " + path);
     }
 
     ~gpiodWrapper() {
@@ -50,16 +50,16 @@ public:
             gpiod_chip_close(chip);
     }
 
-    // ----------------- Basisfunktionen -----------------
+    // ----------------- Basic functions -----------------
    void configurePin(unsigned int pin, Direction dir) {
        if (line.count(pin)) return;
-       if (!chip) throw std::runtime_error("Kein Chip geöffnet!");
+       if (!chip) throw std::runtime_error("No chip opened!");
 
        gpiod_line_settings *settings = gpiod_line_settings_new();
        gpiod_line_config *lcfg = gpiod_line_config_new();
        unsigned int offset = pin;
 
-       // Richtung & Pull-Settings
+       // Direction & Pull Settings
        switch (dir) {
            case Output:
                gpiod_line_settings_set_direction(settings, GPIOD_LINE_DIRECTION_OUTPUT);
@@ -81,8 +81,8 @@ public:
                break;
 
            default:
-               std::cerr << "Ungültiger Direction-Wert für Pin "
-               << pin << " – setze auf sicheren INPUT (High-Impedance)\n";
+               std::cerr << "Invalid direction value for PIN "
+               << pin << " – focus on secure input (High-Impedance)\n";
                gpiod_line_settings_set_direction(settings, GPIOD_LINE_DIRECTION_INPUT);
                gpiod_line_settings_set_bias(settings, GPIOD_LINE_BIAS_AS_IS);
                break;     
@@ -98,7 +98,7 @@ public:
            gpiod_line_config_free(lcfg);
            gpiod_line_settings_free(settings);
            gpiod_request_config_free(rcfg);
-           throw std::runtime_error("Pin " + std::to_string(pin) + " konnte nicht angefordert werden");
+           throw std::runtime_error("Pin " + std::to_string(pin) + " could not be requested");
        }
 
        gpiod_line_config_free(lcfg);
@@ -128,7 +128,7 @@ public:
         }
     }
 
-    // ----------------- Komfortfunktionen -----------------
+    // ----------------- Comfort features -----------------
     void blinkPin(unsigned int pin, int interval_ms, int times = -1) {
         stopPinThread(pin);
         running[pin] = true;
@@ -180,32 +180,32 @@ public:
     }
 
 
-// Interrupt-Handling (Edge Events) – libgpiod 2.x kompatibel
+// Interrupt handling (Edge Events) – libgpiod 2.x compatible
 template <typename Func>
    void attachInterrupt(int pin, Edge edge, Func userCallback) {
       if (!chip) return;
 
       if (line.find(pin) == line.end()) {
-         std::cerr << "Pin " << pin << " ist nicht konfiguriert!\n";
+         std::cerr << "Pin " << pin << " is not configured!\n";
          return;
       }
 
       auto *req = line[pin];
       if (!req) {
-         std::cerr << "Kein aktiver Linien-Request für Pin " << pin << "\n";
+         std::cerr << "No active line request for Pin " << pin << "\n";
          return;
       }
 
-      // Lambda automatisch in std::function<void(int)> wandeln
+      // Automatically convert lambda to std::function<void(int)>
       std::function<void(int)> callback;
       if constexpr (std::is_invocable_v<Func, int>) {
-         callback = userCallback; // passt schon
+         callback = userCallback; // That's fine.
       } 
       else if constexpr (std::is_invocable_v<Func>) {
-         callback = [userCallback](int) { userCallback(); }; // ohne Parameter
+         callback = [userCallback](int) { userCallback(); }; // without parameters
       } 
       else {
-         static_assert(always_false<Func>, "Callback muss void() oder void(int) sein");
+         static_assert(always_false<Func>, "Callback must be void() or void(int).");
       }
 
       running[pin] = true;
@@ -214,7 +214,7 @@ template <typename Func>
          while (running.at(pin)) {
              gpiod_edge_event_buffer *buffer = gpiod_edge_event_buffer_new(1);
              if (!buffer) {
-                 std::cerr << "Fehler beim Anlegen des Event-Buffers\n";
+                 std::cerr << "Error creating event buffer\n";
                  break;
              }
 
@@ -268,7 +268,7 @@ private:
     
     void checkPin(unsigned int pin) {
         if (!line.count(pin))
-            throw std::runtime_error("Pin " + std::to_string(pin) + " nicht konfiguriert");
+            throw std::runtime_error("Pin " + std::to_string(pin) + " not configured");
     }
 
     void stopPinThread(unsigned int pin) {
