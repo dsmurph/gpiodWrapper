@@ -20,8 +20,8 @@
 #include "gpiodWrapper.hpp"
 
 int main() {
-    gpiodWrapper chip(0);
-    chip.configurePin(17, Output);
-    chip.setPin(17, HIGH);
-    chip.setPin(17, LOW);
+    gpiodWrapper chip(0);          // Open
+    chip.configurePin(17, Output); // configure Pin 
+    chip.setPin(17, HIGH);         // Set Pin HIGH
+    chip.setPin(17, LOW);          // Set Pin LOW
 }
