@@ -159,13 +159,23 @@ sudo apt install cmake -y
 CMakeLists.txt (change blink.cpp for your project)
 ```cmake
 cmake_minimum_required(VERSION 3.10)
-project(gpiodWrapperExample)
+
+project(your_project VERSION 1.00 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(example blink.cpp)
-target_link_libraries(example gpiod)
-target_include_directories(example PRIVATE include)
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
+set(SOURCES
+    ${PROJECT_SOURCE_DIR}/src/your_source_file.cpp
+)
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_link_libraries(${PROJECT_NAME} gpiod)
+
+
 ```
 ---
 
