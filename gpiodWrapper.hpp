@@ -16,6 +16,8 @@
  * GitHub: https://github.com/dsmurph/gpiodWrapper
  */
 
+#pragma once
+
 #include <gpiod.h>
 #include <iostream>
 #include <map>
