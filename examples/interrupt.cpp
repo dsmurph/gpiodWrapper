@@ -21,10 +21,12 @@
 #include <thread>
 #include <chrono>
 
+
+// Include class gpiodWrapper
 #include "gpiodWrapper.hpp"
 
 int main() {
-    // Chip open
+    // Open gpiochip
     gpiodWrapper chip(0);
 
     // Configure Pin (GPIO18 Input)
