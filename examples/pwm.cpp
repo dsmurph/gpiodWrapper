@@ -21,10 +21,13 @@
 #include <iostream>
 #include <chrono>
 
+// Include class gpiodWrapper
 #include "gpiodWrapper.hpp"
 
 int main() {
     try {
+      
+        // Configure gpiochip
         gpiodWrapper chip(0);
 
         // LED Pin 17
