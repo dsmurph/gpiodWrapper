@@ -34,8 +34,8 @@ int main() {
         // Internal pull-up resistor ensures a clear high signal
         chip.configurePin(18, Pullup);
         
-        // Interrupt on rising edge
-        chip.attachInterrupt(18, RISING, []() {
+        // Interrupt on falling edge
+        chip.attachInterrupt(18, FALLING, []() {
             std::cout << "Button pressed!\n";
         });
         
