@@ -21,20 +21,31 @@
 #include <chrono>
 #include <thread>
 
+
+// Include class gpiodWrapper
 #include "gpiodWrapper.hpp"
 
 int main() {
     try {
-        gpiodWrapper chip(0);
-        chip.configurePin(18, Pullup);
 
+        // /dev/gpiochip0 open        
+        gpiodWrapper chip(0);
+        
+        // Internal pull-up resistor ensures a clear high signal
+        chip.configurePin(18, Pullup);
+        
+        // Interrupt on rising edge
         chip.attachInterrupt(18, RISING, []() {
             std::cout << "Button pressed!\n";
         });
-
+        
+        // Give it some time for the issue
         std::this_thread::sleep_for(std::chrono::seconds(20));
 
+        // Interrupt reset
         chip.detachInterrupt(18);
+        
+        // Pin reset
         chip.resetPin(18);
     } catch (const std::exception &e) {
         std::cerr << e.what() << "\n";
