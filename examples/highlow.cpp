@@ -17,6 +17,7 @@
  * GitHub: https://github.com/dsmurph/gpiodWrapper
  */
 
+// Include class gpiodWrapper
 #include "gpiodWrapper.hpp"
 
 int main() {
