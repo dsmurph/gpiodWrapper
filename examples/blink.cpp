@@ -21,12 +21,14 @@
 #include <chrono>
 #include <thread>
 
+// Include class gpiodWrapper
 #include "gpiodWrapper.hpp"
 
 int main() {
     try {
-        // /dev/gpiochip0 open
+        // Open gpiochip
         gpiodWrapper chip(0);
+        
         // Pin17 as Output
         chip.configurePin(17, Output);
 
@@ -34,6 +36,7 @@ int main() {
         chip.blinkPin(17, 500, 10);
 
         std::this_thread::sleep_for(std::chrono::seconds(6));
+       
         // Optional Pin reset
         chip.resetPin(17);
 
