@@ -156,7 +156,7 @@ sudo apt install cmake -y
 
 ## 🔧 Integration Example 
 
-CMakeLists.txt (change blink.cpp for your project)
+CMakeLists.txt (change file.cpp for your project)
 ```cmake
 cmake_minimum_required(VERSION 3.10)
 
