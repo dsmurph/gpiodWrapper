@@ -222,6 +222,8 @@ make
 Here's another nice example from a different project where I'm using gpiodWrapper.
 
 ```cpp
+#include "time_utils.h"
+
 void faultCtrl() {
     // /dev/gpiochip0 open
     gpiodWrapper chip(0);
@@ -249,6 +251,31 @@ void faultCtrl() {
     }
 }
 ```
+---
+You're wondering about millis and delay? Little header helper.
+---
+
+```
+
+// time_utils.h ;)
+
+#pragma once
+#include <chrono>
+#include <thread>
+
+inline void delay(unsigned long ms) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+}
+
+inline unsigned long millis() {
+    using namespace std::chrono;
+    static const auto start = steady_clock::now();
+    return duration_cast<milliseconds>(steady_clock::now() - start).count();
+}
+
+```
+
+---
 
 ---
 
