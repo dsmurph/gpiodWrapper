@@ -33,7 +33,7 @@ Install libgpiod (Debian / Raspberry Pi OS):
 ```bash
 sudo apt install libgpiod-dev
 ```
-libgpiod-2.2.2 self build e.g. RaspberryOS bullseye/bookworm
+libgpiod-2.x self build e.g. RaspberryOS bullseye/bookworm
 ```
 sudo apt update
 sudo apt install -y build-essential autoconf automake libtool pkg-config autoconf-archive
