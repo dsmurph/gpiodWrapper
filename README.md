@@ -277,8 +277,6 @@ inline unsigned long millis() {
 
 ---
 
----
-
 ## 📄 License
 
 MIT License  
