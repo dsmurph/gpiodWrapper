@@ -35,7 +35,8 @@ sudo apt install libgpiod-dev
 ```
 libgpiod-2.2.2 self build e.g. RaspberryOS bullseye/bookworm
 ```
-sudo apt install -y autoconf automake libtool pkg-config autoconf-archive build-essential git
+sudo apt update
+sudo apt install -y build-essential autoconf automake libtool pkg-config autoconf-archive
 
 wget https://mirrors.edge.kernel.org/pub/software/libs/libgpiod/libgpiod-2.2.2.tar.xz
 tar -xvf libgpiod-2.2.2.tar.xz
